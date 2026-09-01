@@ -1,0 +1,46 @@
+/* 行业面积地图：面积由当前排序指标决定，而不是固定等宽卡片。 */
+@media (min-width: 1180px) {
+  .index-strip {
+    width: calc((100% - 16px) * .7585);
+    min-height: 186px;
+    padding: 14px 18px;
+  }
+
+  .index-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+
+  .index-item {
+    padding: 12px 18px;
+  }
+
+  .layout aside { margin-top: -206px; }
+}
+
+.heatmap .sector-col > div {
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  grid-auto-rows: 88px;
+  grid-auto-flow: row;
+  gap: 7px;
+}
+
+.heatmap .sector-card {
+  grid-column: span 1 !important;
+  grid-row: span 1 !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  padding: 10px 11px !important;
+}
+
+.heatmap .sector-card strong { margin-top: 4px; }
+.heatmap .sector-card.rise-tile { background: hsl(8 62% calc(98% - var(--shade))) !important; }
+.heatmap .sector-card.fall-tile { background: hsl(171 32% calc(97% - var(--shade))) !important; }
+.heatmap .sector-card.rise-tile strong { color: #b63f32 !important; }
+.heatmap .sector-card.fall-tile strong { color: #08756f !important; }
+.heatmap .sector-card::after { content: ''; width: var(--bar); height: 3px; margin-top: 5px; background: currentColor; opacity: .42; }
+
+@media (max-width: 900px) {
+  .heatmap .sector-col > div { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+}

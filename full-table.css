@@ -1,0 +1,2 @@
+.stock-frame{width:100%;height:680px;border:1px solid #e3e5e1;border-radius:5px;background:#fff}
+body:has(#all-stocks:target) nav a,body:has(#my-watchlist:target) nav a{color:var(--muted);border-bottom:0;font-weight:400}body:has(#all-stocks:target) nav a[href="#all-stocks"],body:has(#my-watchlist:target) nav a[href="#my-watchlist"]{color:var(--ink);border-bottom:1.5px solid var(--ink);font-weight:600}

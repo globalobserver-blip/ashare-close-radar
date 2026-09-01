@@ -1,0 +1,59 @@
+name: 每日收盘数据更新
+
+on:
+  schedule:
+    # 北京时间 15:15 = UTC 07:15；中国法定休市日由更新脚本自动回退到最近完整交易日。
+    - cron: "15 7 * * 1-5"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+  actions: read
+
+concurrency:
+  group: ashare-pages
+  cancel-in-progress: false
+
+jobs:
+  update-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+    steps:
+      - name: 获取当前网页与数据
+        uses: actions/checkout@v4
+
+      - name: 准备 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 更新最近完整交易日数据
+        env:
+          TUSHARE_TOKEN: ${{ secrets.TUSHARE_TOKEN }}
+        run: python update_market.py
+
+      - name: 保存更新后的市场快照
+        run: |
+          git config user.name "ashare-close-radar-bot"
+          git config user.email "ashare-close-radar-bot@users.noreply.github.com"
+          git add data/market.json data/history
+          git diff --cached --quiet || git commit -m "data: update close snapshot"
+          git push
+
+      - name: 生成公开静态网页
+        run: python build_pages.py
+
+      - name: 配置 GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: 上传网页文件
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: 发布 GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,1 @@
+.watch-toggle{position:absolute;opacity:0;pointer-events:none}.watch-label{border:1px solid #c8ddd4;border-radius:3px;color:#06756f;cursor:pointer;font-size:12px;padding:7px 9px}.watch-label:after{content:'加入自选'}.watch-toggle:checked + .watch-label{background:#e4f0ea}.watch-toggle:checked + .watch-label:after{content:'已加入自选'}

@@ -1,0 +1,14 @@
+/* 资金数值的单位退后一级，避免与主数值抢占视觉重心。 */
+.heatmap .sector-card .flow-unit {
+  display: inline;
+  margin-left: 2px;
+  font-size: 13px !important;
+  font-weight: 600;
+  vertical-align: 0;
+}
+
+.market-line b.rise,
+.market-line b.fall {
+  font-size: 13px;
+  font-weight: 600;
+}

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A 股收盘后市场情报工作台" />
+    <title>收盘雷达 · A股市场情报台</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="refined.css?v=5" />
+    <link rel="stylesheet" href="watch.css?v=1" />
+    <link rel="stylesheet" href="full-table.css?v=1" />
+    <link rel="stylesheet" href="market-upgrade.css?v=1" />
+    <link rel="stylesheet" href="industry-style.css?v=1" />
+    <link rel="stylesheet" href="sector-redesign.css?v=2" />
+    <link rel="stylesheet" href="layout-polish.css?v=4" />
+    <link rel="stylesheet" href="fund-flow-polish.css?v=2" />
+    <link rel="stylesheet" href="treemap-layout.css?v=3" />
+    <link rel="stylesheet" href="detail-polish.css?v=1" />
+    <link rel="stylesheet" href="industry-modal.css?v=1" />
+    <link rel="stylesheet" href="industry-summary.css?v=1" />
+    <link rel="stylesheet" href="industry-summary-polish.css?v=1" />
+    <link rel="stylesheet" href="navigation-fixed.css?v=2" />
+    <link rel="stylesheet" href="main-scanner.css?v=1" />
+    <link rel="stylesheet" href="market-summary-fonts.css?v=4" />
+    <link rel="stylesheet" href="stock-links.css?v=1" />
+    <link rel="stylesheet" href="disclosures.css?v=1" />
+  </head>
+  <body>
+    <main class="shell">
+      <header>
+        <div class="brand"><span class="brand-mark">R.</span><div class="brand-copy"><b>收盘雷达</b><small>A-SHARE · DAILY CLOSE</small></div></div>
+        <nav aria-label="主导航"><a class="active" href="#market">市场</a><a href="#all-stocks">个股扫描</a><a href="#disclosures">公告研报</a><a href="#my-watchlist">自选</a></nav>
+        <div class="status"><i></i>演示数据 <strong>08.31 · 16:42</strong></div>
+      </header>
+
+      <section class="intro">
+        <div class="overview-copy"><p class="eyebrow">DAILY CLOSE / 2026.08.31 周一</p><div class="overview-title-row"><h1>市场收盘概览</h1><p class="sub">情绪回暖，科技成长主导；全市场 71.7% 个股收涨。</p></div></div>
+        <div class="actions"><button class="date" id="manualUpdate">更新数据</button><button class="date">08 月 31 日</button><button class="primary">今日复盘 <span>→</span></button></div>
+      </section>
+
+      <section class="metrics" aria-label="市场核心指标">
+        <article data-metric="shanghai"><p>上证指数</p><strong>—</strong><em class="muted">加载收盘数据</em><span class="spark up-line">╱╲╱╲╱╱</span></article>
+        <article data-metric="shenzhen"><p>深证成指</p><strong>—</strong><em class="muted">加载收盘数据</em><span class="spark up-line">╱╱╲╱╱╱</span></article>
+        <article data-metric="turnover"><p>成交额</p><strong>—</strong><em class="muted">全市场成交额</em><span class="spark gold-line">╱╱╲╲╱╱</span></article>
+        <article class="market-breadth" data-metric="breadth"><p>市场宽度</p><strong>—</strong><em class="muted">上涨 / 下跌家数</em><span class="breadth"><b></b></span><div class="limit-summary"><span>涨停 / 跌停</span><b data-limit-value>—</b></div></article>
+      </section>
+      <section class="index-strip" id="indexPanel"><p>正在加载最近完整收盘日的主要指数…</p></section>
+      <section class="thesis" aria-label="今日市场结论"><span class="thesis-label">今日结论</span><p><b>风险偏好回升。</b> 算力、半导体与消费电子形成共振；防御板块相对承压。</p><button>查看复盘依据 →</button></section>
+
+      <section class="layout">
+        <div class="main-column">
+          <article class="panel heat-panel">
+            <div class="panel-head"><div><p class="eyebrow">MARKET MAP</p><h2>资金与行业热度</h2></div><div class="heat-filter"><button class="selected" onclick="this.parentElement.querySelectorAll('button').forEach(x=>x.classList.remove('selected'));this.classList.add('selected')">涨跌幅</button><button onclick="this.parentElement.querySelectorAll('button').forEach(x=>x.classList.remove('selected'));this.classList.add('selected')">成交额</button><button onclick="this.parentElement.querySelectorAll('button').forEach(x=>x.classList.remove('selected'));this.classList.add('selected')">资金流入</button></div></div>
+            <div class="heatmap">
+              <div class="heat hot"><span>半导体</span><b>+3.82%</b></div><div class="heat warm"><span>通信设备</span><b>+2.91%</b></div><div class="heat warm"><span>软件开发</span><b>+2.44%</b></div><div class="heat warm"><span>电池</span><b>+1.78%</b></div>
+              <div class="heat cool"><span>银行</span><b>-0.36%</b></div><div class="heat hot big"><span>AI 算力</span><b>+4.13%</b><small>37 股上涨</small></div><div class="heat warm"><span>光伏设备</span><b>+1.65%</b></div><div class="heat cool"><span>煤炭</span><b>-1.22%</b></div>
+              <div class="heat warm"><span>军工电子</span><b>+2.17%</b></div><div class="heat hot"><span>消费电子</span><b>+3.06%</b></div><div class="heat cool"><span>白酒</span><b>-0.73%</b></div><div class="heat warm"><span>创新药</span><b>+1.24%</b></div>
+            </div>
+            <p class="caption">当前展示：行业涨跌幅。点击可切换观察维度；行业成交额、资金流数据将在相应数据源接入后启用。</p>
+          </article>
+
+          <article class="panel table-panel">
+            <div class="panel-head"><div><p class="eyebrow">CLOSE SCANNER</p><h2>今日异动扫描</h2></div><div class="filter"><button class="selected">放量上涨</button><button>创新高</button><button>资金流入</button></div></div>
+            <div class="table-wrap"><table><thead><tr><th>股票</th><th>收盘</th><th>涨跌幅</th><th>成交额</th><th>触发信号</th><th></th></tr></thead><tbody id="stockRows"></tbody></table></div>
+            <button class="view-all">查看全部 5,228 只股票 <span>→</span></button>
+          </article>
+        </div>
+        <aside>
+          <article class="panel pulse"><div class="panel-head"><div><p class="eyebrow">CLOSE PULSE</p><h2>收盘脉搏</h2></div><span class="badge">偏积极</span></div><div class="gauge"><div class="gauge-value"><strong>72</strong><small>/100</small></div></div><div class="legend"><span>恐慌</span><span>中性</span><span>亢奋</span></div><p>成交额回升，科技成长领涨；高位股分歧仍需留意。</p><hr /><div class="signal" data-signal="flow"><span>市场主力资金<small>全市场净流入</small></span><b>—</b></div><div class="signal"><span>连板高度<small>当前最高连板</small></span><b>5 <small>板</small></b></div></article>
+          <article class="panel briefing"><div class="panel-head"><div><p class="eyebrow">DISCLOSURE FEED</p><h2>重要披露</h2></div><button class="ghost">全部</button></div><ul><li><span class="tag result">业绩</span><div><b><a class="stock-link" href="data/stock_detail.html?code=300750.SZ">宁德时代</a> <a class="stock-code stock-link" href="data/stock_detail.html?code=300750.SZ">300750.SZ</a> · 半年报</b><p>归母净利润同比增长 31.3%</p></div><time>17:28</time></li><li><span class="tag repurchase">回购</span><div><b><a class="stock-link" href="data/stock_detail.html?code=000333.SZ">美的集团</a> <a class="stock-code stock-link" href="data/stock_detail.html?code=000333.SZ">000333.SZ</a> · 回购进展</b><p>已回购股份 0.82%</p></div><time>16:56</time></li><li><span class="tag rating">评级</span><div><b><a class="stock-link" href="data/stock_detail.html?code=300308.SZ">中际旭创</a> <a class="stock-code stock-link" href="data/stock_detail.html?code=300308.SZ">300308.SZ</a> · 机构覆盖</b><p>3 家机构上调盈利预测</p></div><time>16:24</time></li></ul><button class="view-all">浏览公告与研报 <span>→</span></button></article>
+        </aside>
+      </section>
+      <section id="workspace" class="workspace" hidden aria-live="polite"></section>
+      <section id="stocks" class="workspace-static"><div class="workspace-header"><div><p class="eyebrow">LAST COMPLETE CLOSE</p><h1>个股扫描</h1><p>数据已覆盖 5,547 只 A 股；此处优先展示成交额靠前个股。</p></div><input class="search-input" placeholder="搜索名称或代码" /></div><div class="stock-grid"><article class="stock-card"><b>中际旭创</b><small>300308.SZ</small><span class="price">858.35</span><footer><span class="muted">-0.90%</span><button class="add-watch" onclick="this.classList.toggle('saved');this.textContent=this.classList.contains('saved')?'已加入自选':'加入自选'">加入自选</button></footer></article><article class="stock-card"><b>亨通光电</b><small>600487.SH</small><span class="price">68.70</span><footer><span class="muted">-3.65%</span><button class="add-watch" onclick="this.classList.toggle('saved');this.textContent=this.classList.contains('saved')?'已加入自选':'加入自选'">加入自选</button></footer></article><article class="stock-card"><b>新易盛</b><small>300502.SZ</small><span class="price">399.00</span><footer><span class="muted">-2.47%</span><button class="add-watch" onclick="this.classList.toggle('saved');this.textContent=this.classList.contains('saved')?'已加入自选':'加入自选'">加入自选</button></footer></article><article class="stock-card"><b>生益科技</b><small>600183.SH</small><span class="price">145.65</span><footer><span class="up">+3.32%</span><button class="add-watch" onclick="this.classList.toggle('saved');this.textContent=this.classList.contains('saved')?'已加入自选':'加入自选'">加入自选</button></footer></article><article class="stock-card"><b>胜宏科技</b><small>300476.SZ</small><span class="price">241.60</span><footer><span class="muted">-8.15%</span><button class="add-watch" onclick="this.classList.toggle('saved');this.textContent=this.classList.contains('saved')?'已加入自选':'加入自选'">加入自选</button></footer></article><article class="stock-card"><b>兆易创新</b><small>603986.SH</small><span class="price">396.82</span><footer><span class="muted">-3.50%</span><button class="add-watch" onclick="this.classList.toggle('saved');this.textContent=this.classList.contains('saved')?'已加入自选':'加入自选'">加入自选</button></footer></article></div><p class="caption">完整股票列表及搜索、分页将在下一轮接入本地索引。</p></section>
+      <section id="disclosures" class="workspace-static"><div class="workspace-header disclosure-title"><div><p class="eyebrow">DISCLOSURE CENTER</p><h1>公告研报</h1><p>研报按发布日期归档；正式公告将仅在数据权限可用后显示。</p></div><span class="coverage-chip" id="reportCoverage">正在读取覆盖范围…</span></div><div class="disclosure-layout"><article class="disclosure-status"><p class="eyebrow">OFFICIAL ANNOUNCEMENTS</p><h2>正式公告</h2><span class="status-tag">当前未授权</span><p>当前 TuShare token 未开通正式公告接口，因此不会显示未经验证的公告内容。</p><small>可用后将接入业绩、回购、分红、增减持及重大事项。</small></article><section class="research-feed"><div class="research-head"><div><p class="eyebrow">RESEARCH FEED</p><h2>机构研报与评级</h2></div><span id="reportCount">加载中</span></div><div id="reportRows" class="report-rows"><p class="report-loading">正在载入真实研报数据…</p></div></section></div></section>
+      <section id="watchlist" class="workspace-static"><div class="workspace-header"><div><p class="eyebrow">MY LIST</p><h1>自选股</h1><p>在个股扫描中点击“加入自选”即可建立关注列表。</p></div></div><div class="watch-empty">还没有自选股。请先前往“个股”页面添加。</div></section>
+      <section id="all-stocks" class="workspace-static"><div id="scannerMount"></div></section>
+      <section id="my-watchlist" class="workspace-static"><div class="workspace-header"><div><p class="eyebrow">MY WATCHLIST</p><h1>自选股</h1><p>支持观察池、长期跟踪和事件关注三个本地分组。</p></div></div><iframe class="stock-frame" title="A股自选股" src="data/watchlist2.html?v=2"></iframe></section>
+    </main>
+    <div class="industry-modal" id="industryModal" hidden aria-hidden="true"><div class="industry-modal__backdrop" data-close-industry></div><section class="industry-modal__panel" role="dialog" aria-modal="true" aria-labelledby="industryTitle"><header><div class="industry-modal__heading"><p class="eyebrow">INDUSTRY STOCK POOL</p><h2 id="industryTitle">行业股票池</h2><p id="industryMeta"></p></div><div class="industry-modal__summary" id="industrySummary"></div><button class="industry-modal__close" data-close-industry aria-label="关闭">×</button></header><div class="industry-modal__body" id="industryBody"></div></section></div>
+    <script src="app.js?v=10"></script>
+    <script src="nav.js?v=1"></script>
+    <script src="market-panel.js?v=11"></script>
+    <script src="disclosures.js?v=1"></script>
+  </body>
+</html>

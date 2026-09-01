@@ -1,0 +1,54 @@
+/* 弹窗顶部采用固定三层节奏，避免摘要与表头发生垂直重叠。 */
+.industry-modal__panel header {
+  min-height: 116px;
+  align-items: stretch;
+  padding: 16px 28px !important;
+}
+
+.industry-modal__heading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.industry-modal__heading .eyebrow {
+  margin: 0 0 7px;
+  font-size: 10px;
+  line-height: 1;
+}
+
+.industry-modal__panel h2 {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.15;
+}
+
+.industry-modal__heading #industryMeta {
+  margin: 9px 0 0;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.industry-modal__summary {
+  align-self: center;
+  min-height: 62px;
+}
+
+.industry-modal__summary div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 18px;
+}
+
+.industry-modal__summary span { font-size: 12px; line-height: 1.1; }
+.industry-modal__summary b { margin-top: 7px; font-size: 18px; line-height: 1.05; }
+.industry-modal__summary small { margin-top: 6px; font-size: 11px; line-height: 1; }
+.industry-modal__close { align-self: center; }
+.industry-modal__body { padding-top: 2px; }
+.industry-modal__body th { height: 48px; vertical-align: middle; }
+
+@media(max-width:900px) {
+  .industry-modal__panel header { min-height: 0; }
+  .industry-modal__summary { min-height: 74px; }
+}
