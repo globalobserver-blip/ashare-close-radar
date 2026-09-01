@@ -1,0 +1,5 @@
+/* A 股通用颜色语义：上涨红、下跌绿、平盘黑。 */
+.up, .rise { color: #cf4e3d !important; }
+.down, .fall { color: #08756f !important; }
+.flat { color: #172b38 !important; }
+

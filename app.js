@@ -1,8 +1,10 @@
 const rows = document.querySelector('#stockRows');
 const detailHref = code => `data/stock_detail.html?code=${encodeURIComponent(code)}&from=${encodeURIComponent(`${location.pathname}${location.search}${location.hash}`)}`;
+const pctClass = value => Number(value) > 0 ? 'up' : Number(value) < 0 ? 'down' : 'flat';
+const pctText = value => `${Number(value) > 0 ? '+' : ''}${Number(value).toFixed(2)}%`;
 const renderRows = stocks => {
   if (!rows) return;
-  rows.innerHTML = stocks.map(stock => `<tr><td><a class="stock-link" href="${detailHref(stock.code)}"><b>${stock.name}</b></a><a class="code stock-link" href="${detailHref(stock.code)}">${stock.code}</a></td><td>${Number(stock.close).toFixed(2)}</td><td class="${Number(stock.pct_chg) >= 0 ? 'up' : 'down'}">${Number(stock.pct_chg) >= 0 ? '+' : ''}${Number(stock.pct_chg).toFixed(2)}%</td><td>${stock.amount_billion} 亿</td><td><span class="pill">成交额居前</span></td><td>→</td></tr>`).join('');
+  rows.innerHTML = stocks.map(stock => `<tr><td><a class="stock-link" href="${detailHref(stock.code)}"><b>${stock.name}</b></a><a class="code stock-link" href="${detailHref(stock.code)}">${stock.code}</a></td><td>${Number(stock.close).toFixed(2)}</td><td class="${pctClass(stock.pct_chg)}">${pctText(stock.pct_chg)}</td><td>${stock.amount_billion} 亿</td><td><span class="pill">成交额居前</span></td><td>→</td></tr>`).join('');
 };
 
 const renderScanner = data => {
@@ -15,7 +17,7 @@ const renderScanner = data => {
     const group = mount.querySelector('#scannerGroup').value, start = (page - 1) * 50, visible = filtered.slice(start, start + 50), groups = getGroups();
     mount.querySelector('#scannerRows').innerHTML = visible.map((stock, index) => {
       const saved = (groups[group] || []).includes(stock.code);
-      return `<tr><td>${start + index + 1}</td><td><a href="${detailHref(stock.code)}">${stock.name}</a><a class="scanner-code" href="${detailHref(stock.code)}">${stock.code}</a></td><td>${Number(stock.close).toFixed(2)}</td><td class="${Number(stock.pct_chg) >= 0 ? 'up' : 'down'}">${Number(stock.pct_chg) >= 0 ? '+' : ''}${Number(stock.pct_chg).toFixed(2)}%</td><td>${stock.amount_billion} 亿</td><td>${stock.turnover_rate ?? '-'}%</td><td><button class="scanner-add ${saved ? 'saved' : ''}" data-code="${stock.code}">${saved ? '已加入' : '加入自选'}</button></td></tr>`;
+      return `<tr><td>${start + index + 1}</td><td><a href="${detailHref(stock.code)}">${stock.name}</a><a class="scanner-code" href="${detailHref(stock.code)}">${stock.code}</a></td><td>${Number(stock.close).toFixed(2)}</td><td class="${pctClass(stock.pct_chg)}">${pctText(stock.pct_chg)}</td><td>${stock.amount_billion} 亿</td><td>${stock.turnover_rate ?? '-'}%</td><td><button class="scanner-add ${saved ? 'saved' : ''}" data-code="${stock.code}">${saved ? '已加入' : '加入自选'}</button></td></tr>`;
     }).join('');
     mount.querySelector('#scannerCount').textContent = `${filtered.length} 只`;
     mount.querySelector('#scannerPage').textContent = `第 ${page} / ${Math.max(1, Math.ceil(filtered.length / 50))} 页`;

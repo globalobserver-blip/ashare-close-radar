@@ -14,8 +14,9 @@
     const saved = groups();
     $('#b').innerHTML = items.map((stock, index) => {
       const active = (saved[group] || []).includes(stock.code);
-      const sign = Number(stock.pct_chg) >= 0 ? '+' : '';
-      const tone = Number(stock.pct_chg) >= 0 ? 'up' : 'down';
+      const change = Number(stock.pct_chg);
+      const sign = change > 0 ? '+' : '';
+      const tone = change > 0 ? 'up' : change < 0 ? 'down' : 'flat';
       return `<tr><td>${start + index + 1}</td><td><a href="${detailUrl(stock.code)}">${stock.name}</a><a href="${detailUrl(stock.code)}"><small>${stock.code}</small></a></td><td>${Number(stock.close).toFixed(2)}</td><td class="${tone}">${sign}${Number(stock.pct_chg).toFixed(2)}%</td><td>${stock.amount_billion}亿</td><td>${stock.turnover_rate ?? '-'}%</td><td><button class="add ${active ? 'added' : ''}" data-code="${stock.code}">${active ? '已加入' : '加入自选'}</button></td></tr>`;
     }).join('');
     $('#n').textContent = `${filtered.length}只`;
